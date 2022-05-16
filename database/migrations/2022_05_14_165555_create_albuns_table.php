@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('albuns', function (Blueprint $table) {
             $table->id();
+            $table->string('nome',128);
             $table->string('artista',128);
             $table->string('genero',64);
             $table->string('foto', 256);

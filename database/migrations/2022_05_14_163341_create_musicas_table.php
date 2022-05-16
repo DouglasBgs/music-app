@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 128);
             $table->time('duracao');
+            $table->string('path');
+            $table->integer('AlbumId');
             $table->timestamps();
         });
     }
