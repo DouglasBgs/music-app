@@ -16,13 +16,15 @@ class MusicasController extends Controller
         return view('musicas.index', compact('musicas'));
     }
 
-    public  function  create(Request $request) {
+    public  function  create(Request $request)
+    {
         $albumId = $request->albumId;
 
-        return view('musicas.create', compact('albumId') );
+        return view('musicas.create', compact('albumId'));
     }
 
-    public function store (Request $request) {
+    public function store(Request $request)
+    {
         $Musica = new Musicas();
 
         $Musica->nome = $request->input('nomeMusica');
@@ -32,14 +34,13 @@ class MusicasController extends Controller
         $audio = new Mp3Info($requestAudio, true);
         $Musica->duracao = date("H:i:s.u", $audio->duration);
         $extension = $requestAudio->extension();
-        $AudioName = md5($requestAudio->getClientOriginalName(). strtotime("now")).".".$extension;
+        $AudioName = md5($requestAudio->getClientOriginalName() . strtotime("now")) . "." . $extension;
         $request->audio->move(public_path('musicas/'), $AudioName);
 
         $Musica->path = $AudioName;
 
         $Musica->save();
 
-        return redirect('/albuns/consulta/'.$request->albumId);
-
+        return redirect('/albuns/consulta/' . $request->albumId);
     }
 }

@@ -12,7 +12,6 @@ class AlbunsController extends Controller
     public function index()
     {
         $albuns = Albuns::all();
-
         return view('albuns.index', compact('albuns'));
     }
 
@@ -21,10 +20,10 @@ class AlbunsController extends Controller
         return view('albuns.create');
     }
 
-    public function show(Request $request) {
+    public function show(Request $request)
+    {
         $id = $request->id;
-        return view('albuns.show', ['album' => Albuns::findOrFail($id),'musicas' => Musicas::all()->where('AlbumId',$id)]);
-
+        return view('albuns.show', ['album' => Albuns::findOrFail($id), 'musicas' => Musicas::all()->where('AlbumId', $id)]);
     }
 
     public function store(Request $request)
@@ -40,37 +39,34 @@ class AlbunsController extends Controller
         $Albuns->preco = $request->input('preco');
 
 
-            $requestImage = $request->image;
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName(). strtotime("now")).".".$extension;
-            $request->image->move(public_path('images/albuns'), $imageName);
+        $requestImage = $request->image;
+        $extension = $requestImage->extension();
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+        $request->image->move(public_path('images/albuns'), $imageName);
 
-            $Albuns->foto = $imageName;
+        $Albuns->foto = $imageName;
 
 
 
         $Albuns->save();
-        $NewAlbumId =  str( $Albuns->getAttribute('id'));
+        $NewAlbumId =  str($Albuns->getAttribute('id'));
 
-        return redirect('/albuns/consulta/'.$NewAlbumId);
-
+        return redirect('/albuns/consulta/' . $NewAlbumId);
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
 
         $album = Albuns::findOrFail($request->id);
 
         return view('albuns.edit', compact('album'));
-
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         Albuns::findOrFail($request->id)->update($request->all());
 
-
         return redirect('/albuns');
     }
-
-
 }

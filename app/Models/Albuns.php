@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Albuns extends Model
 {
-    protected $guarded =['foto'];
+    protected $guarded = ['foto'];
     use HasFactory;
 }

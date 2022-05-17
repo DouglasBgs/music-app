@@ -15,11 +15,11 @@
         </div>
         <div class="col-md-6">
             <label for="image" class="form-label">Foto capa do álbum</label>
-            <input type="file" accept="image/*" class="form-control"  id="image" name="image" required>
+            <input type="file" accept="image/*" class="form-control" id="image" name="image" required>
         </div>
         <div class="col-md-6">
             <label for="preco" class="form-label">Preço</label>
-            <input type="number"  min="1" step="any"  class="form-control" id="preco" name="preco" required>
+            <input type="number" min="1" step="any" class="form-control" id="preco" name="preco" required>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Criar</button>
